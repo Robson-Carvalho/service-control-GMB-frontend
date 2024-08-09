@@ -1,9 +1,16 @@
-import { useAuth } from "@/context/AuthContext/useAuth";
+import { useAuth } from "@/hooks/auth";
 import { Navigate, Outlet } from "react-router-dom";
 
-const PrivateRoute: React.FC = () => {
-  const { isAuthenticated } = useAuth();
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
-};
+export const PrivateRoute = () => {
+  const { signed, loading } = useAuth();
 
-export default PrivateRoute;
+  if (loading) {
+    return (
+      <div className="w-full h-full flex justify-center items-center bg-primary-foreground">
+        <p className="font-bold text-2xl">Carregando!</p>
+      </div>
+    );
+  } else {
+    return signed ? <Outlet /> : <Navigate to="/login" />;
+  }
+};

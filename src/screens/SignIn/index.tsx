@@ -20,21 +20,32 @@ import { Label } from "@radix-ui/react-label";
 import social from "../../assets/social.svg";
 import team from "../../assets/team.svg";
 import work from "../../assets/work.svg";
-import { useNavigate } from "react-router";
-import { useAuth } from "@/context/AuthContext/useAuth";
+
 import { useState } from "react";
+import { useAuth } from "@/hooks/auth";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const SignIn = () => {
-  const auth = useAuth();
+  const { signIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
-  const handleLogin = async (email: string, password: string) => {
+  const handleSignIn = async (event: React.FormEvent) => {
+    event.preventDefault();
+
     try {
-      await auth.authenticate(email, password);
-      naviagte("/dashbord");
-    } catch (error) {}
+      await signIn(email, password);
+      navigate("/dashbord");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        const { message } = error;
+        toast.warning(`${message}`);
+      } else {
+        toast.error("Erro inesperado ao fazer login");
+      }
+    }
   };
 
   return (
@@ -75,45 +86,44 @@ export const SignIn = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <div>
-                <Label htmlFor="email" className="font-bold ">
-                  E-mail
-                </Label>
-                <Input
-                  id="email"
-                  placeholder="exemplo@email.com"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-              <div className="mt-4">
-                <Label htmlFor="password" className="font-bold">
-                  Senha
-                </Label>
-                <Input
-                  id="password"
-                  placeholder="Sua senha"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1"
-                />
-              </div>
-              <Button
-                className="mt-6 w-full"
-                onClick={() => handleLogin(email, password)}
-              >
-                Entrar
-              </Button>
-              <CardFooter className="mt-4">
-                <p className="text-muted-foreground text-center text-sm">
-                  Ao entrar em nossa plataforma você concorda com nossos termos
-                  de Uso e Política de Privacidade.
-                </p>
-              </CardFooter>
+              <form onSubmit={handleSignIn}>
+                <div>
+                  <Label htmlFor="email" className="font-bold ">
+                    E-mail
+                  </Label>
+                  <Input
+                    id="email"
+                    placeholder="exemplo@email.com"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="mt-1"
+                  />
+                </div>
+                <div className="mt-4">
+                  <Label htmlFor="password" className="font-bold">
+                    Senha
+                  </Label>
+                  <Input
+                    id="password"
+                    placeholder="Sua senha"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="mt-1"
+                  />
+                </div>
+                <Button className="mt-6 w-full" type="submit">
+                  Entrar
+                </Button>
+              </form>
             </CardContent>
+            <CardFooter className="mt-4">
+              <p className="text-muted-foreground text-center text-sm">
+                Ao entrar em nossa plataforma você concorda com nossos termos de
+                Uso e Política de Privacidade.
+              </p>
+            </CardFooter>
           </Card>
         </section>
       </main>

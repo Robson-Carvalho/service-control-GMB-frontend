@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { AuthProvider } from "./context/AuthContext";
-import PrivateRoute from "./components/ProtectedRoute";
-
 import { Home } from "./screens/Home";
 import { SignIn } from "./screens/SignIn";
 import { Dashboard } from "./screens/Dashboard";
+import { AuthProvider } from "./context/auth";
+import { PrivateRoute } from "./components/ProtectedRoute";
 
 export const App = () => {
   return (
