@@ -6,6 +6,7 @@ import { SignIn } from "./screens/SignIn";
 import { Dashboard } from "./screens/Dashboard";
 import { AuthProvider } from "./context/auth";
 import { PrivateRoute } from "./components/ProtectedRoute";
+import { NotFound } from "./screens/NotFound";
 
 export const App = () => {
   return (
@@ -15,8 +16,9 @@ export const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route element={<PrivateRoute />}>
-            <Route path="/dashbord" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <ToastContainer />
       </Router>

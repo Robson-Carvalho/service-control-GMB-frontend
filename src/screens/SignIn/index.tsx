@@ -37,7 +37,7 @@ export const SignIn = () => {
 
     try {
       await signIn(email, password);
-      navigate("/dashbord");
+      navigate("/dashboard");
     } catch (error: unknown) {
       if (error instanceof Error) {
         const { message } = error;
@@ -49,7 +49,7 @@ export const SignIn = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className=" relative min-h-screen flex flex-col">
       <main className="flex-grow flex w-full flex-col md:flex-row justify-center items-center ">
         <div className="hidden md:flex  w-full h-full items-center justify-center p-16">
           <Carousel className="w-full max-w-xl">
