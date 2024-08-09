@@ -33,9 +33,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       const storageUser = localStorage.getItem("@Auth:user");
       const storageToken = localStorage.getItem("@Auth:token");
 
-      console.log("Storage User:", storageUser);
-      console.log("Storage Token:", storageToken);
-
       const localUser = JSON.parse(storageUser as string);
 
       if (localUser && storageToken) {
