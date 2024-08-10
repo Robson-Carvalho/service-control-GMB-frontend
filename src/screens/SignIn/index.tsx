@@ -25,6 +25,7 @@ import { useState } from "react";
 import { useAuth } from "@/hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Footer } from "@/components/Footer";
 
 export const SignIn = () => {
   const { signIn } = useAuth();
@@ -128,10 +129,7 @@ export const SignIn = () => {
         </section>
       </main>
 
-      <footer className="absolute bottom-0 w-full text-center text-xs text-muted-foreground p-4 bg-primary-foreground">
-        &copy; {new Date().getFullYear()} Next Automações. Todos os direitos
-        reservados.
-      </footer>
+      <Footer />
     </div>
   );
 };

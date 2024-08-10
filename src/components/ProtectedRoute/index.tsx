@@ -6,8 +6,10 @@ export const PrivateRoute = () => {
 
   if (loading) {
     return (
-      <div className="w-full h-full flex justify-center items-center bg-primary-foreground">
-        <p className="font-bold text-2xl">Carregando!</p>
+      <div className="page flex flex-col min-h-screen bg-primary-foreground">
+        <div className="flex-grow  px-2 py-3  mx-auto">
+          <p className="font-bold text-2xl"></p>
+        </div>
       </div>
     );
   } else {
