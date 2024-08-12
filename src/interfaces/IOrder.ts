@@ -7,3 +7,8 @@ export interface IOrder {
   date: string;
   date_update: string;
 }
+
+export interface IOrderWithCommunity {
+  community: string;
+  date: string;
+}
