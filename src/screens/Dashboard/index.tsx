@@ -10,6 +10,8 @@ import {
 import {
   ChartConfig,
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -222,8 +224,8 @@ export const Dashboard = () => {
 
               <Card className="flex flex-col">
                 <CardHeader className="items-center pb-0">
-                  <CardTitle>Pie Chart - Donut with Text</CardTitle>
-                  <CardDescription>January - June 2024</CardDescription>
+                  <CardTitle>Solicitações por Comunidade</CardTitle>
+                  <CardDescription>Janeiro - Dezembro 2024</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1 pb-0">
                   <ChartContainer
@@ -264,7 +266,7 @@ export const Dashboard = () => {
                                     y={(viewBox.cy || 0) + 24}
                                     className="fill-muted-foreground"
                                   >
-                                    Visitors
+                                    Visitantes
                                   </tspan>
                                 </text>
                               );
@@ -272,6 +274,11 @@ export const Dashboard = () => {
                           }}
                         />
                       </Pie>
+
+                      <ChartLegend
+                        content={<ChartLegendContent nameKey="community" />}
+                        className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                      />
                     </PieChart>
                   </ChartContainer>
                 </CardContent>
