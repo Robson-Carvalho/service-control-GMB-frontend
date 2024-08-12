@@ -93,7 +93,7 @@ export const Header = () => {
         <div className="flex items-center justify-between gap-4">
           <Sheet>
             <SheetTrigger>
-              <Button>Menu</Button>
+              <Button variant="outline">Menu</Button>
             </SheetTrigger>
             <SheetContent>
               <ul className="mt-4 flex flex-col items-start gap-2">
@@ -110,9 +110,10 @@ export const Header = () => {
                   <p>Habitantes</p>
                 </Link>
                 <Separator className="my-1" />
+
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button variant="outline" className="px-6">
+                    <Button variant="destructive" className="px-6">
                       Sair
                     </Button>
                   </AlertDialogTrigger>
@@ -126,7 +127,7 @@ export const Header = () => {
                         Tem certeza que deseja sair do sistema?
                       </AlertDialogDescription>
 
-                      <AlertDialogFooter className="flex justify-end mt-4 space-x-2">
+                      <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
                         <AlertDialogCancel className="mr-3 text-gray-500 hover:text-gray-700">
                           Cancelar
                         </AlertDialogCancel>
@@ -146,9 +147,7 @@ export const Header = () => {
 
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="outline" className="px-6">
-                Sair
-              </Button>
+              <Button variant="destructive">Sair</Button>
             </AlertDialogTrigger>
 
             <AlertDialogContent className="px-2 fixed inset-0 z-50 flex items-center justify-center bg-black/50">
@@ -160,15 +159,12 @@ export const Header = () => {
                   Tem certeza que deseja sair do sistema?
                 </AlertDialogDescription>
 
-                <AlertDialogFooter className="flex justify-end mt-4 space-x-2">
+                <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
                   <AlertDialogCancel className="mr-3 text-gray-500 hover:text-gray-700">
-                    Cancelar
+                    <Button variant="outline">Cancelar</Button>
                   </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => logout()}
-                    className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
-                  >
-                    Sair
+                  <AlertDialogAction onClick={() => logout()}>
+                    <Button variant="destructive">Sair</Button>
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </div>

@@ -149,12 +149,11 @@ const Cell = ({ row }: { row: Row<IInhabitant> }) => {
           </div>
           <DialogFooter className="gap-2">
             <DialogClose asChild>
-              <Button className="bg-red-500 hover:bg-red-500/95 text-white">
-                Cancelar
-              </Button>
+              <Button variant="destructive">Cancelar</Button>
             </DialogClose>
             <Button
               type="submit"
+              variant="default"
               onClick={() => handleSubmit(row.original._id)}
             >
               Salvar
