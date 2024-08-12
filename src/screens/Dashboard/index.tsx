@@ -10,8 +10,6 @@ import {
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -29,6 +27,7 @@ import {
   LabelList,
   XAxis,
   YAxis,
+  Label,
 } from "recharts";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
@@ -223,20 +222,56 @@ export const Dashboard = () => {
 
               <Card className="flex flex-col">
                 <CardHeader className="items-center pb-0">
-                  <CardTitle>Solicitações por Comunidade</CardTitle>
-                  <CardDescription>Janeiro - Dezembro {year}</CardDescription>
+                  <CardTitle>Pie Chart - Donut with Text</CardTitle>
+                  <CardDescription>January - June 2024</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-1 pb-0">
                   <ChartContainer
                     config={PieChartConfig}
-                    className="mx-auto aspect-square max-h-[300px]"
+                    className="mx-auto aspect-square max-h-[250px]"
                   >
                     <PieChart>
-                      <Pie data={PieChartData} dataKey="visitors" />
-                      <ChartLegend
-                        content={<ChartLegendContent nameKey="community" />}
-                        className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                      <ChartTooltip
+                        cursor={false}
+                        content={<ChartTooltipContent hideLabel />}
                       />
+                      <Pie
+                        data={PieChartData}
+                        dataKey="visitors"
+                        nameKey="community"
+                        innerRadius={60}
+                        strokeWidth={5}
+                      >
+                        <Label
+                          content={({ viewBox }) => {
+                            if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                              return (
+                                <text
+                                  x={viewBox.cx}
+                                  y={viewBox.cy}
+                                  textAnchor="middle"
+                                  dominantBaseline="middle"
+                                >
+                                  <tspan
+                                    x={viewBox.cx}
+                                    y={viewBox.cy}
+                                    className="fill-foreground text-3xl font-bold"
+                                  >
+                                    {ordersQuantity.length}
+                                  </tspan>
+                                  <tspan
+                                    x={viewBox.cx}
+                                    y={(viewBox.cy || 0) + 24}
+                                    className="fill-muted-foreground"
+                                  >
+                                    Visitors
+                                  </tspan>
+                                </text>
+                              );
+                            }
+                          }}
+                        />
+                      </Pie>
                     </PieChart>
                   </ChartContainer>
                 </CardContent>
