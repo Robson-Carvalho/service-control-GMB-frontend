@@ -34,6 +34,7 @@ import {
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@radix-ui/react-separator";
 
 export const Dashboard = () => {
   const [ordersQuantity, setOrdersQuantity] = useState<IOrderWithCommunity[]>(
@@ -163,7 +164,11 @@ export const Dashboard = () => {
 
             <Button onClick={generatePDF}>Baixar</Button>
           </div>
+        </section>
 
+        <Separator className="my-4 mx-auto max-w-[1440px]" />
+
+        <section className="max-w-[1440px] mx-auto">
           <div className="my-8 download">
             <div className="charts flex flex-col gap-4">
               <Card>

@@ -31,7 +31,7 @@ export const Header = () => {
   const firstName = name?.split(" ")[0];
 
   return (
-    <header className="w-full px-2 pt-4 pb-2">
+    <header className="w-full py-4">
       <nav className="max-w-[1440px] mx-auto flex flex-row items-center justify-between">
         <Dialog>
           <DialogTrigger asChild>
