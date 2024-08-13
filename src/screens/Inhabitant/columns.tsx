@@ -147,17 +147,21 @@ const Cell = ({ row }: { row: Row<IInhabitant> }) => {
               />
             </div>
           </div>
-          <DialogFooter className="gap-2">
-            <DialogClose asChild>
-              <Button variant="destructive">Cancelar</Button>
-            </DialogClose>
-            <Button
-              type="submit"
-              variant="default"
-              onClick={() => handleSubmit(row.original._id)}
-            >
-              Salvar
-            </Button>
+
+          <DialogFooter>
+            <div className="flex flex-row justify-end items-center gap-4">
+              <DialogClose asChild>
+                <Button variant="destructive">Cancelar</Button>
+              </DialogClose>
+
+              <Button
+                type="submit"
+                variant="default"
+                onClick={() => handleSubmit(row.original._id)}
+              >
+                Salvar
+              </Button>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
