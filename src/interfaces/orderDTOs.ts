@@ -21,12 +21,11 @@ export interface IOrderWithCommunity {
 
 export interface ICreateOrderDTO {
   content: string;
-  inhabitantID: string;
-  status: OrderStatusRole;
+  inhabitantCPF: string;
+  userID: string;
 }
 
 export interface IUpdateOrderDTO {
   content: string;
-  inhabitantID: string;
   status: OrderStatusRole;
 }
