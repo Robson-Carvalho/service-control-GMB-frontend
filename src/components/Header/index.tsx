@@ -31,7 +31,7 @@ export const Header = () => {
   const firstName = name?.split(" ")[0];
 
   return (
-    <header className="w-full py-4">
+    <header className="w-full py-4 px-2">
       <nav className="max-w-[1440px] mx-auto flex flex-row items-center justify-between">
         <Dialog>
           <DialogTrigger asChild>
@@ -51,13 +51,15 @@ export const Header = () => {
                   </p>
                 </DialogDescription>
               </DialogHeader>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="username" className="text-right">
-                  ID
-                </Label>
-                <Input id="username" value={_id} className="col-span-3" />
-              </div>
+
               <div className="grid gap-4 py-4">
+                <div className="grid grid-cols-4 items-center gap-4">
+                  <Label htmlFor="id" className="text-right">
+                    ID
+                  </Label>
+                  <Input id="id" value={_id} className="col-span-3" />
+                </div>
+
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="name" className="text-right">
                     Name
@@ -82,8 +84,8 @@ export const Header = () => {
                 </div>
               </div>
               <DialogFooter>
-                <DialogClose>
-                  <Button type="submit">Voltar</Button>
+                <DialogClose asChild>
+                  <Button type="button">Voltar</Button>
                 </DialogClose>
               </DialogFooter>
             </div>
@@ -128,7 +130,7 @@ export const Header = () => {
                       </AlertDialogDescription>
 
                       <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
-                        <AlertDialogCancel className="mr-3 text-gray-500 hover:text-gray-700">
+                        <AlertDialogCancel className="text-gray-500 hover:text-gray-700">
                           Cancelar
                         </AlertDialogCancel>
                         <AlertDialogAction
@@ -160,11 +162,14 @@ export const Header = () => {
                 </AlertDialogDescription>
 
                 <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
-                  <AlertDialogCancel className="mr-3 text-gray-500 hover:text-gray-700">
-                    <Button variant="outline">Cancelar</Button>
+                  <AlertDialogCancel className="text-gray-500 hover:text-gray-700">
+                    Cancelar
                   </AlertDialogCancel>
-                  <AlertDialogAction onClick={() => logout()}>
-                    <Button variant="destructive">Sair</Button>
+                  <AlertDialogAction
+                    onClick={() => logout()}
+                    className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
+                  >
+                    Sair
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </div>

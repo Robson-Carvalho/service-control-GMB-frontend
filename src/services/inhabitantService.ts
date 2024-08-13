@@ -1,90 +1,122 @@
 import axios from "axios";
 import { Api } from "./api";
-import { IInhabitant } from "@/interfaces/IInhabitant";
-
-interface IUpdateInhabitantResponse {
-  message: string;
-  inhabitant: {
-    _id: string;
-    name: string;
-    cpf: string;
-    numberPhone: string;
-    address: {
-      community: string;
-      street: string;
-      number: string;
-    };
-  };
-}
-
-export interface IUpdateInhabitantRequest {
-  _id: string;
-  name: string;
-  cpf: string;
-  numberPhone: string;
-  address: {
-    community: string;
-    street: string;
-    number: string;
-  };
-}
+import {
+  ICreateInhabitantDTO,
+  IInhabitant,
+  IUpdateInhabitantDTO,
+} from "@/interfaces/inhabitantDTOs";
 
 export const inhabitantService = {
-  async getAllInhabitant(): Promise<IInhabitant[]> {
+  async create(data: ICreateInhabitantDTO) {
+    try {
+      const response = await Api.post("/inhabitant", data);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          const message = error.response.data.error;
+
+          const statusCode = error.response.status;
+
+          if (statusCode === 400) {
+            throw new Error(message);
+          } else if (statusCode == 401) {
+            throw new Error(message);
+          } else if (statusCode === 500) {
+            throw new Error(message);
+          } else {
+            throw new Error(message);
+          }
+        } else if (error.request) {
+          throw new Error(
+            "Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde."
+          );
+        } else {
+          throw new Error(
+            "Ocorreu um erro desconhecido ao processar a solicitação."
+          );
+        }
+      } else {
+        throw new Error(
+          "Ocorreu um erro desconhecido ao processar a solicitação."
+        );
+      }
+    }
+  },
+
+  async getAll(): Promise<IInhabitant[]> {
     try {
       const response = await Api.get<IInhabitant[]>("/inhabitant");
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
+          const message = error.response.data.error;
+
           const statusCode = error.response.status;
+
           if (statusCode === 400) {
-            throw new Error("Erro ao buscar todos os habitantes");
+            throw new Error(message);
+          } else if (statusCode == 401) {
+            throw new Error(message);
           } else if (statusCode === 500) {
-            throw new Error("Erro no servidor!");
+            throw new Error(message);
           } else {
-            throw new Error("Erro inesperado!");
+            throw new Error(message);
           }
         } else if (error.request) {
-          throw new Error("Erro no servidor!");
+          throw new Error(
+            "Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde."
+          );
         } else {
-          throw new Error("Erro no servidor!");
+          throw new Error(
+            "Ocorreu um erro desconhecido ao processar a solicitação."
+          );
         }
       } else {
-        throw new Error("Erro no servidor!");
+        throw new Error(
+          "Ocorreu um erro desconhecido ao processar a solicitação."
+        );
       }
     }
   },
 
-  async updateInhabitant(
-    _id: string,
-    inhabitant: IUpdateInhabitantRequest
-  ): Promise<IUpdateInhabitantResponse> {
+  async update(_id: string, inhabitant: IUpdateInhabitantDTO) {
     try {
-      const response = await Api.put<IUpdateInhabitantResponse>(
-        `/inhabitant/${_id}`,
-        inhabitant
-      );
+      const response = await Api.put(`/inhabitant/${_id}`, inhabitant);
+
       const { data } = response;
+
       return data;
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
+          const message = error.response.data.error;
+
           const statusCode = error.response.status;
+
           if (statusCode === 400) {
-            throw new Error("Erro ao atualizar habitante");
+            throw new Error(message);
+          } else if (statusCode == 401) {
+            throw new Error(message);
           } else if (statusCode === 500) {
-            throw new Error("Erro no servidor!");
+            throw new Error(message);
           } else {
-            throw new Error("Erro inesperado!");
+            throw new Error(message);
           }
         } else if (error.request) {
-          throw new Error("Erro no servidor!");
+          throw new Error(
+            "Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde."
+          );
         } else {
-          throw new Error("Erro no servidor!");
+          throw new Error(
+            "Ocorreu um erro desconhecido ao processar a solicitação."
+          );
         }
       } else {
-        throw new Error("Erro no servidor!");
+        throw new Error(
+          "Ocorreu um erro desconhecido ao processar a solicitação."
+        );
       }
     }
   },

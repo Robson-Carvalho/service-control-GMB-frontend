@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Api } from "./api";
-import { IOrderWithCommunity } from "@/interfaces/IOrder";
+import { IOrderWithCommunity } from "@/interfaces/orderDTOs";
 
 export const orderService = {
   async getOrdersQuantity(): Promise<IOrderWithCommunity[]> {
