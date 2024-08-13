@@ -1,14 +1,8 @@
 export enum CommunityName {
   DEFAULT = "",
-  JACAREZEINHO = "Jacarezeinho",
+  JACAREZEINHO = "Jacarezinho",
   QUEIMADAS = "Queimadas",
   QUIXABEIRA = "Quixabeira",
-}
-
-export enum CommunityName {
-  Jacarezeinho = "Jacarezeinho",
-  Queimadas = "Queimadas",
-  Quixabeira = "Quixabeira",
 }
 
 export interface IAddress {

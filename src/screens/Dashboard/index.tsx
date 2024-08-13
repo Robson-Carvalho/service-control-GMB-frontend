@@ -96,7 +96,7 @@ export const Dashboard = () => {
   const PieChartData = [
     {
       community: "jacarezinho",
-      visitors: communityCount["Jacarezeinho"] || 0,
+      visitors: communityCount["Jacarezinho"] || 0,
       fill: "#b91c1c",
     },
     {
