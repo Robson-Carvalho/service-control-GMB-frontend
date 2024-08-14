@@ -15,15 +15,36 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/auth";
-import { ICreateOrderDTO } from "@/interfaces/orderDTOs";
+import { ICreateOrderDTO, IOrderDataTable } from "@/interfaces/orderDTOs";
 import { orderService } from "@/services/orderService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { DataTable } from "./dataTable";
+import { columns } from "./columns";
 
 export const Order = () => {
   const [content, setContent] = useState("");
   const [cpf, setCpf] = useState("");
   const { _id } = useAuth();
+
+  const [orders, setOrders] = useState<IOrderDataTable[]>([]);
+
+  useEffect(() => {
+    async function getOrdersQuantity() {
+      try {
+        const data = await orderService.getAll();
+        setOrders(data);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          const { message } = error;
+          toast.warning(`${message}`);
+        } else {
+          toast.error("Erro inesperado ao fazer login");
+        }
+      }
+    }
+    getOrdersQuantity();
+  }, []);
 
   const handleCreateOrder = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -99,9 +120,7 @@ export const Order = () => {
                     />
                   </div>
 
-                  <Button id="dd" accessKey="d" type="submit">
-                    Salvar
-                  </Button>
+                  <Button type="submit">Salvar</Button>
                 </form>
               </DialogContent>
             </Dialog>
@@ -110,7 +129,9 @@ export const Order = () => {
 
         <Separator className="my-4 mx-auto max-w-[1440px]" />
 
-        <section className="max-w-[1440px] mx-auto"></section>
+        <section className="max-w-[1440px] mx-auto">
+          <DataTable columns={columns} data={orders} />
+        </section>
       </main>
       <Footer />
     </div>

@@ -1,6 +1,11 @@
 import axios from "axios";
 import { Api } from "./api";
-import { ICreateOrderDTO, IOrderWithCommunity } from "@/interfaces/orderDTOs";
+import {
+  ICreateOrderDTO,
+  IOrderDataTable,
+  IOrderWithCommunity,
+  IUpdateOrderDTO,
+} from "@/interfaces/orderDTOs";
 
 export const orderService = {
   async create(createData: ICreateOrderDTO) {
@@ -50,21 +55,108 @@ export const orderService = {
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response) {
+          const message = error.response.data.error;
+
           const statusCode = error.response.status;
+
           if (statusCode === 400) {
-            throw new Error("Erro ao solicitar Order With Community");
+            throw new Error(message);
+          } else if (statusCode == 401) {
+            throw new Error(message);
           } else if (statusCode === 500) {
-            throw new Error("Erro no servidor!");
+            throw new Error(message);
           } else {
-            throw new Error("Erro inesperado!");
+            throw new Error(message);
           }
         } else if (error.request) {
-          throw new Error("Erro no servidor!");
+          throw new Error(
+            "Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde."
+          );
         } else {
-          throw new Error("Erro no servidor!");
+          throw new Error(
+            "Ocorreu um erro desconhecido ao processar a solicitação."
+          );
         }
       } else {
-        throw new Error("Erro no servidor!");
+        throw new Error(
+          "Ocorreu um erro desconhecido ao processar a solicitação."
+        );
+      }
+    }
+  },
+
+  async getAll(): Promise<IOrderDataTable[]> {
+    try {
+      const response = await Api.get<IOrderDataTable[]>("/order/data/view");
+      const { data } = response;
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          const message = error.response.data.error;
+
+          const statusCode = error.response.status;
+
+          if (statusCode === 400) {
+            throw new Error(message);
+          } else if (statusCode == 401) {
+            throw new Error(message);
+          } else if (statusCode === 500) {
+            throw new Error(message);
+          } else {
+            throw new Error(message);
+          }
+        } else if (error.request) {
+          throw new Error(
+            "Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde."
+          );
+        } else {
+          throw new Error(
+            "Ocorreu um erro desconhecido ao processar a solicitação."
+          );
+        }
+      } else {
+        throw new Error(
+          "Ocorreu um erro desconhecido ao processar a solicitação."
+        );
+      }
+    }
+  },
+
+  async update(_id: string, updateData: IUpdateOrderDTO) {
+    try {
+      const response = await Api.put(`/order/${_id}`, { ...updateData });
+      const { data } = response;
+      return data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response) {
+          const message = error.response.data.error;
+
+          const statusCode = error.response.status;
+
+          if (statusCode === 400) {
+            throw new Error(message);
+          } else if (statusCode == 401) {
+            throw new Error(message);
+          } else if (statusCode === 500) {
+            throw new Error(message);
+          } else {
+            throw new Error(message);
+          }
+        } else if (error.request) {
+          throw new Error(
+            "Não foi possível conectar ao servidor. Por favor, tente novamente mais tarde."
+          );
+        } else {
+          throw new Error(
+            "Ocorreu um erro desconhecido ao processar a solicitação."
+          );
+        }
+      } else {
+        throw new Error(
+          "Ocorreu um erro desconhecido ao processar a solicitação."
+        );
       }
     }
   },
