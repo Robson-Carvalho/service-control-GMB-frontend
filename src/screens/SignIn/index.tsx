@@ -33,26 +33,33 @@ export const SignIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
+
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();
+    setLoadingButton(true);
 
     try {
       await signIn(email, password);
+      setLoadingButton(false);
+
       navigate("/dashboard");
     } catch (error: unknown) {
       if (error instanceof Error) {
         const { message } = error;
+        setLoadingButton(false);
         toast.warning(`${message}`);
       } else {
+        setLoadingButton(false);
         toast.error("Erro inesperado ao fazer login");
       }
     }
   };
 
   return (
-    <div className=" relative min-h-screen flex flex-col">
-      <main className="flex-grow flex w-full flex-col md:flex-row justify-center items-center ">
-        <div className="hidden md:flex  w-full h-full items-center justify-center p-16">
+    <div className="relative min-h-screen flex flex-col">
+      <main className="flex-grow flex w-full flex-col md:flex-row justify-center items-center">
+        <div className="hidden md:flex w-full h-full items-center justify-center p-16">
           <Carousel className="w-full max-w-xl">
             <CarouselContent>
               <CarouselItem>
@@ -89,10 +96,11 @@ export const SignIn = () => {
             <CardContent>
               <form onSubmit={handleSignIn}>
                 <div>
-                  <Label htmlFor="email" className="font-bold ">
+                  <Label htmlFor="email" className="font-bold">
                     E-mail
                   </Label>
                   <Input
+                    required
                     id="email"
                     placeholder="exemplo@email.com"
                     type="email"
@@ -106,6 +114,7 @@ export const SignIn = () => {
                     Senha
                   </Label>
                   <Input
+                    required
                     id="password"
                     placeholder="Sua senha"
                     type="password"
@@ -114,8 +123,17 @@ export const SignIn = () => {
                     className="mt-1"
                   />
                 </div>
-                <Button className="mt-6 w-full" type="submit">
-                  Entrar
+
+                <Button
+                  disabled={loadingButton}
+                  className={`mt-6 w-full ${
+                    loadingButton
+                      ? "bg-gray-400"
+                      : "bg-blue-500 hover:bg-blue-600"
+                  }`}
+                  type="submit"
+                >
+                  {loadingButton ? "Carregando..." : "Entrar"}
                 </Button>
               </form>
             </CardContent>
