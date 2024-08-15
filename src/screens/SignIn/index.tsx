@@ -28,12 +28,15 @@ import { toast } from "react-toastify";
 import { Footer } from "@/components/Footer";
 
 export const SignIn = () => {
-  const { signIn } = useAuth();
+  const { signIn, signed } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   const [loadingButton, setLoadingButton] = useState<boolean>(false);
+
+  if (signed) {
+    navigate("/dashboard");
+  }
 
   const handleSignIn = async (event: React.FormEvent) => {
     event.preventDefault();

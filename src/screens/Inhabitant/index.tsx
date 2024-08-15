@@ -139,8 +139,11 @@ export const Inhabitant = () => {
                   </DialogDescription>
                 </DialogHeader>
 
-                <form onSubmit={handleSubmit} className="grid gap-4 py-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
+                <form
+                  onSubmit={handleSubmit}
+                  className="flex flex-col w-full gap-4 py-4"
+                >
+                  <div className="flex flex-col items-start gap-4">
                     <Label htmlFor="name" className="text-right">
                       Nome
                     </Label>
@@ -154,7 +157,7 @@ export const Inhabitant = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="flex flex-col items-start gap-4">
                     <Label htmlFor="cpf" className="text-right">
                       CPF
                     </Label>
@@ -167,7 +170,7 @@ export const Inhabitant = () => {
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="flex flex-col items-start gap-4">
                     <Label htmlFor="numberPhone" className="text-right">
                       Telefone
                     </Label>
@@ -179,7 +182,7 @@ export const Inhabitant = () => {
                       placeholder="Telefone"
                     />
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="flex flex-col items-start gap-4">
                     <Label htmlFor="community" className="text-right">
                       Comunidade
                     </Label>
@@ -203,7 +206,7 @@ export const Inhabitant = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="flex flex-col items-start gap-4">
                     <Label htmlFor="street" className="text-right">
                       Rua
                     </Label>
@@ -216,7 +219,7 @@ export const Inhabitant = () => {
                       required
                     />
                   </div>
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="flex flex-col items-start gap-4">
                     <Label htmlFor="number" className="text-right">
                       Nº
                     </Label>
@@ -225,7 +228,7 @@ export const Inhabitant = () => {
                       value={formState.number}
                       onChange={handleChange}
                       className="col-span-3"
-                      placeholder="Nº"
+                      placeholder="Número da residência"
                       required
                     />
                   </div>

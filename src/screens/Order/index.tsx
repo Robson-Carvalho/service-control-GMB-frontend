@@ -84,7 +84,7 @@ export const Order = () => {
               }}
             >
               <DialogTrigger asChild>
-                <Button variant="default">Criar pedido</Button>
+                <Button variant="default">Adicionar</Button>
               </DialogTrigger>
 
               <DialogContent className="sm:max-w-[425px] rounded-sm ">

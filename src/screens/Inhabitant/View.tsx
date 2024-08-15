@@ -79,8 +79,8 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
               Faça mudanças no perfil aqui. Clique em salvar para finalizar.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
+          <div className="flex flex-col w-full gap-4 py-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="name" className="text-right">
                 Nome
               </Label>
@@ -92,7 +92,7 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="cpf" className="text-right">
                 CPF
               </Label>
@@ -104,7 +104,7 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="numberPhone" className="text-right">
                 Telefone
               </Label>
@@ -116,7 +116,7 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="community" className="text-right">
                 Comunidade
               </Label>
@@ -135,7 +135,7 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="street" className="text-right">
                 Rua
               </Label>
@@ -147,7 +147,7 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 className="col-span-3"
               />
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col items-start gap-4">
               <Label htmlFor="number" className="text-right">
                 Nº
               </Label>

@@ -39,7 +39,7 @@ export const Header = () => {
             <Button variant="outline">{firstName}</Button>
           </DialogTrigger>
 
-          <DialogContent className="sm:max-w-[425px] rounded-sm ">
+          <DialogContent className="sm:max-w-[425px] rounded-sm">
             <DialogHeader>
               <DialogTitle>Informações do Serividor(a) público</DialogTitle>
               <DialogDescription>
@@ -47,27 +47,27 @@ export const Header = () => {
               </DialogDescription>
             </DialogHeader>
 
-            <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
+            <div className="flex flex-col w-full gap-4 py-4">
+              <div className="flex flex-col items-start gap-4">
                 <Label htmlFor="id" className="text-right">
                   ID
                 </Label>
                 <Input id="id" value={_id} className="col-span-3" />
               </div>
 
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="flex flex-col items-start gap-4">
                 <Label htmlFor="name" className="text-right">
                   Name
                 </Label>
                 <Input id="name" value={name} className="col-span-3" />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="flex flex-col items-start gap-4">
                 <Label htmlFor="email" className="text-right">
                   E-mail
                 </Label>
                 <Input id="email" value={email} className="col-span-3" />
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
+              <div className="flex flex-col items-start gap-4">
                 <Label htmlFor="userType" className="text-right">
                   Setor
                 </Label>
@@ -85,7 +85,7 @@ export const Header = () => {
             <SheetContent>
               <ul className="mt-4 flex flex-col items-start gap-2">
                 <Link to="/dashboard">
-                  <p>Home</p>
+                  <p>Dashboard</p>
                 </Link>
                 <Separator className="my-1" />
 
