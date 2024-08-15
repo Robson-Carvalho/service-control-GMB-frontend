@@ -7,18 +7,19 @@ import {
   AlertDialogCancel,
   AlertDialogAction,
 } from "@radix-ui/react-alert-dialog";
+
 import {
-  Dialog,
+  DialogHeader,
   DialogTrigger,
+  Dialog,
   DialogContent,
-  DialogTitle,
   DialogDescription,
-  DialogClose,
-} from "@radix-ui/react-dialog";
+  DialogTitle,
+} from "@/components/ui/dialog";
+
 import { Label } from "@radix-ui/react-label";
 import { AlertDialogFooter } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import { DialogHeader, DialogFooter } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { useAuth } from "@/hooks/auth";
 import { Sheet, SheetTrigger, SheetContent } from "../ui/sheet";
@@ -37,57 +38,41 @@ export const Header = () => {
           <DialogTrigger asChild>
             <Button variant="outline">{firstName}</Button>
           </DialogTrigger>
-          <DialogContent className="px-2 fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-              <DialogHeader>
-                <DialogTitle>
-                  <p className="font-bold text-lg">
-                    Informações do Servidor Público
-                  </p>
-                </DialogTitle>
-                <DialogDescription>
-                  <p className="mb-2">
-                    Informações detalhadas sobre o usuário atualmente logado.
-                  </p>
-                </DialogDescription>
-              </DialogHeader>
 
-              <div className="grid gap-4 py-4">
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="id" className="text-right">
-                    ID
-                  </Label>
-                  <Input id="id" value={_id} className="col-span-3" />
-                </div>
+          <DialogContent className="sm:max-w-[425px] rounded-sm ">
+            <DialogHeader>
+              <DialogTitle>Informações do Serividor(a) público</DialogTitle>
+              <DialogDescription>
+                Essas informações são referentes ao servidor(a) {firstName}.
+              </DialogDescription>
+            </DialogHeader>
 
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="name" className="text-right">
-                    Name
-                  </Label>
-                  <Input id="name" value={name} className="col-span-3" />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="email" className="text-right">
-                    E-mail
-                  </Label>
-                  <Input id="email" value={email} className="col-span-3" />
-                </div>
-                <div className="grid grid-cols-4 items-center gap-4">
-                  <Label htmlFor="userType" className="text-right">
-                    Setor
-                  </Label>
-                  <Input
-                    id="userType"
-                    value={userType}
-                    className="col-span-3"
-                  />
-                </div>
+            <div className="grid gap-4 py-4">
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="id" className="text-right">
+                  ID
+                </Label>
+                <Input id="id" value={_id} className="col-span-3" />
               </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button type="button">Voltar</Button>
-                </DialogClose>
-              </DialogFooter>
+
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="name" className="text-right">
+                  Name
+                </Label>
+                <Input id="name" value={name} className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="email" className="text-right">
+                  E-mail
+                </Label>
+                <Input id="email" value={email} className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+                <Label htmlFor="userType" className="text-right">
+                  Setor
+                </Label>
+                <Input id="userType" value={userType} className="col-span-3" />
+              </div>
             </div>
           </DialogContent>
         </Dialog>

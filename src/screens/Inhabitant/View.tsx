@@ -1,10 +1,8 @@
 import { Button } from "@/components/ui/button";
 import {
   DialogHeader,
-  DialogFooter,
   DialogTrigger,
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
@@ -28,7 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export const Cell = ({ row }: { row: Row<IInhabitant> }) => {
+export const View = ({ row }: { row: Row<IInhabitant> }) => {
   const [name, setName] = useState<string>(row.original.name);
   const [cpf, setCpf] = useState<string>(row.original.cpf);
   const [numberPhone, setNumberPhone] = useState<string | undefined>(
@@ -161,23 +159,15 @@ export const Cell = ({ row }: { row: Row<IInhabitant> }) => {
                 className="col-span-3"
               />
             </div>
+
+            <Button
+              type="submit"
+              variant="default"
+              onClick={() => handleSubmit(row.original._id)}
+            >
+              Salvar
+            </Button>
           </div>
-
-          <DialogFooter>
-            <div className="flex flex-row justify-end items-center gap-4">
-              <DialogClose asChild>
-                <Button variant="destructive">Cancelar</Button>
-              </DialogClose>
-
-              <Button
-                type="submit"
-                variant="default"
-                onClick={() => handleSubmit(row.original._id)}
-              >
-                Salvar
-              </Button>
-            </div>
-          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>

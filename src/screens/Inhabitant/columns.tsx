@@ -1,7 +1,7 @@
 import { IInhabitant } from "@/interfaces/inhabitantDTOs";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Cell } from "./Cell";
+import { View } from "./View";
 
 export const columns: ColumnDef<IInhabitant>[] = [
   {
@@ -31,6 +31,6 @@ export const columns: ColumnDef<IInhabitant>[] = [
   {
     id: "actions",
     header: () => <div className="text-center">Ações</div>,
-    cell: ({ row }) => <Cell row={row} />,
+    cell: ({ row }) => <View row={row} />,
   },
 ];

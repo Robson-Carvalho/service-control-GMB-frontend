@@ -10,15 +10,6 @@ import { DataTable } from "./dataTable";
 import { columns } from "./columns";
 import { Input } from "@/components/ui/input";
 
-import { AlertDialogFooter } from "@/components/ui/alert-dialog";
-import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-} from "@radix-ui/react-alert-dialog";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -34,6 +25,14 @@ import {
   ICreateInhabitantDTO,
   IInhabitant,
 } from "@/interfaces/inhabitantDTOs";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface FormState {
   name: string;
@@ -127,128 +126,116 @@ export const Inhabitant = () => {
           <div className="flex flex-row items-center justify-between">
             <h2 className="font-bold text-3xl">Habitantes</h2>
 
-            <AlertDialog>
-              <AlertDialogTrigger asChild>
+            <Dialog>
+              <DialogTrigger asChild>
                 <Button variant="default">Adicionar</Button>
-              </AlertDialogTrigger>
+              </DialogTrigger>
 
-              <AlertDialogContent className="px-2 fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-                <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-                  <AlertDialogTitle className="text-lg font-semibold">
-                    Adicionar habitante{" "}
-                  </AlertDialogTitle>
-                  <AlertDialogDescription className="mt-2 text-sm">
+              <DialogContent className="sm:max-w-[425px] rounded-sm ">
+                <DialogHeader>
+                  <DialogTitle>Adicionar habitante</DialogTitle>
+                  <DialogDescription>
                     Adicione um habitante. Clique em criar para finalizar.
-                  </AlertDialogDescription>
+                  </DialogDescription>
+                </DialogHeader>
 
-                  <form onSubmit={handleSubmit}>
-                    <div className="flex flex-col gap-2 py-4">
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="name" className="text-right">
-                          Nome
-                        </Label>
-                        <Input
-                          id="name"
-                          value={formState.name}
-                          onChange={handleChange}
-                          className="col-span-3"
-                          placeholder="Nome"
-                          required
-                        />
-                      </div>
+                <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="name" className="text-right">
+                      Nome
+                    </Label>
+                    <Input
+                      id="name"
+                      value={formState.name}
+                      onChange={handleChange}
+                      className="col-span-3"
+                      placeholder="Nome"
+                      required
+                    />
+                  </div>
 
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="cpf" className="text-right">
-                          CPF
-                        </Label>
-                        <Input
-                          id="cpf"
-                          value={formState.cpf}
-                          onChange={handleChange}
-                          className="col-span-3"
-                          placeholder="CPF"
-                          required
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="numberPhone" className="text-right">
-                          Telefone
-                        </Label>
-                        <Input
-                          id="numberPhone"
-                          value={formState.numberPhone}
-                          onChange={handleChange}
-                          className="col-span-3"
-                          placeholder="Telefone"
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="community" className="text-right">
-                          Comunidade
-                        </Label>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="cpf" className="text-right">
+                      CPF
+                    </Label>
+                    <Input
+                      id="cpf"
+                      value={formState.cpf}
+                      onChange={handleChange}
+                      className="col-span-3"
+                      placeholder="CPF"
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="numberPhone" className="text-right">
+                      Telefone
+                    </Label>
+                    <Input
+                      id="numberPhone"
+                      value={formState.numberPhone}
+                      onChange={handleChange}
+                      className="col-span-3"
+                      placeholder="Telefone"
+                    />
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="community" className="text-right">
+                      Comunidade
+                    </Label>
 
-                        <Select
-                          required
-                          value={formState.community}
-                          onValueChange={handleSelectChange}
-                        >
-                          <SelectTrigger id="community" className="w-[180px]">
-                            <SelectValue placeholder="Selecione" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup>
-                              <SelectLabel>Comunidade</SelectLabel>
-                              <SelectItem value="Jacarezinho">
-                                Jacarezinho
-                              </SelectItem>
-                              <SelectItem value="Quixabeira">
-                                Quixabeira
-                              </SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="street" className="text-right">
-                          Rua
-                        </Label>
-                        <Input
-                          id="street"
-                          value={formState.street}
-                          onChange={handleChange}
-                          className="col-span-3"
-                          placeholder="Rua"
-                          required
-                        />
-                      </div>
-                      <div className="grid grid-cols-4 items-center gap-4">
-                        <Label htmlFor="number" className="text-right">
-                          Nº
-                        </Label>
-                        <Input
-                          id="number"
-                          value={formState.number}
-                          onChange={handleChange}
-                          className="col-span-3"
-                          placeholder="Nº"
-                          required
-                        />
-                      </div>
-                    </div>
+                    <Select
+                      required
+                      value={formState.community}
+                      onValueChange={handleSelectChange}
+                    >
+                      <SelectTrigger id="community" className="w-[180px]">
+                        <SelectValue placeholder="Selecione" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Comunidade</SelectLabel>
+                          <SelectItem value="Jacarezinho">
+                            Jacarezinho
+                          </SelectItem>
+                          <SelectItem value="Quixabeira">Quixabeira</SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="street" className="text-right">
+                      Rua
+                    </Label>
+                    <Input
+                      id="street"
+                      value={formState.street}
+                      onChange={handleChange}
+                      className="col-span-3"
+                      placeholder="Rua"
+                      required
+                    />
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="number" className="text-right">
+                      Nº
+                    </Label>
+                    <Input
+                      id="number"
+                      value={formState.number}
+                      onChange={handleChange}
+                      className="col-span-3"
+                      placeholder="Nº"
+                      required
+                    />
+                  </div>
 
-                    <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
-                      <AlertDialogCancel className="mr-3 text-gray-500 hover:text-gray-700">
-                        <Button variant="secondary">Cancelar</Button>
-                      </AlertDialogCancel>
-
-                      <Button variant="default" type="submit">
-                        Criar
-                      </Button>
-                    </AlertDialogFooter>
-                  </form>
-                </div>
-              </AlertDialogContent>
-            </AlertDialog>
+                  <Button variant="default" type="submit">
+                    Criar
+                  </Button>
+                </form>
+              </DialogContent>
+            </Dialog>
           </div>
         </section>
 

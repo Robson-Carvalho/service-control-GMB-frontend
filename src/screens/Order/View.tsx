@@ -61,7 +61,7 @@ export const View = ({ row }: { row: Row<IOrderDataTable> }) => {
   };
 
   return (
-    <Dialog>
+    <Dialog onOpenChange={() => setNewStatus(status)}>
       <DialogTrigger asChild>
         <Button variant="outline">Editar</Button>
       </DialogTrigger>
@@ -74,13 +74,10 @@ export const View = ({ row }: { row: Row<IOrderDataTable> }) => {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleUpdate} className="flex flex-col w-full gap-4">
-          <div className="flex flex-col items-start gap-4">
-            <Label htmlFor="cpf" className="text-right">
-              ID
-            </Label>
-            <Input id="cpf" disabled value={_id} className="col-span-3" />
-          </div>
+        <form
+          onSubmit={handleUpdate}
+          className="flex flex-col w-full gap-4 py-4"
+        >
           <div className="flex flex-col items-start gap-4">
             <Label htmlFor="cpf" className="text-right">
               Setor
@@ -89,17 +86,17 @@ export const View = ({ row }: { row: Row<IOrderDataTable> }) => {
           </div>
 
           <div className="flex flex-col items-start gap-4">
-            <Label htmlFor="cpf" className="text-right">
+            <Label htmlFor="name" className="text-right">
               Servidor(a)
             </Label>
-            <Input id="cpf" disabled value={userName} className="col-span-3" />
+            <Input id="name" disabled value={userName} className="col-span-3" />
           </div>
 
           <div className="flex flex-col items-start gap-4">
-            <Label htmlFor="name" className="text-right">
+            <Label htmlFor="content" className="text-right">
               Conteúdo
             </Label>
-            <Textarea disabled value={content} />
+            <Textarea id="content" disabled value={content} />
           </div>
 
           <div className="flex flex-col items-start gap-4">
@@ -136,20 +133,20 @@ export const View = ({ row }: { row: Row<IOrderDataTable> }) => {
           </div>
 
           <div className="flex flex-col items-start gap-4">
-            <Label htmlFor="cpf" className="text-right">
+            <Label htmlFor="date1" className="text-right">
               Data de criação
             </Label>
 
-            <Input id="cpf" disabled value={date} className="col-span-3" />
+            <Input id="date1" disabled value={date} className="col-span-3" />
           </div>
 
           <div className="flex flex-col items-start gap-4">
-            <Label htmlFor="cpf" className="text-right">
+            <Label htmlFor="date2" className="text-right">
               Última atualização
             </Label>
 
             <Input
-              id="cpf"
+              id="date2"
               disabled
               value={date_update}
               className="col-span-3"

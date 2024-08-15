@@ -77,7 +77,12 @@ export const Order = () => {
           <div className="flex flex-row items-center justify-between">
             <h2 className="font-bold text-3xl">Pedidos</h2>
 
-            <Dialog>
+            <Dialog
+              onOpenChange={() => {
+                setContent("");
+                setCpf("");
+              }}
+            >
               <DialogTrigger asChild>
                 <Button variant="default">Criar pedido</Button>
               </DialogTrigger>
