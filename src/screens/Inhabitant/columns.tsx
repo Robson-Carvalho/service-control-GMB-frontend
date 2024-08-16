@@ -17,7 +17,7 @@ export const columns: ColumnDef<IInhabitant>[] = [
     header: "Telefone",
   },
   {
-    accessorKey: "address.community",
+    accessorKey: "communityName",
     header: "Comunidade",
   },
   {

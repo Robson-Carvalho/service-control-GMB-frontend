@@ -1,14 +1,4 @@
 import {
-  AlertDialog,
-  AlertDialogTrigger,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@radix-ui/react-alert-dialog";
-
-import {
   DialogHeader,
   DialogTrigger,
   Dialog,
@@ -16,9 +6,18 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@/components/ui/dialog";
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Label } from "@radix-ui/react-label";
-import { AlertDialogFooter } from "../ui/alert-dialog";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useAuth } from "@/hooks/auth";
@@ -97,6 +96,10 @@ export const Header = () => {
                   <p>Habitantes</p>
                 </Link>
                 <Separator className="my-1" />
+                <Link to="/community">
+                  <p>Comunidades</p>
+                </Link>
+                <Separator className="my-1" />
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
@@ -137,27 +140,25 @@ export const Header = () => {
               <Button variant="destructive">Sair</Button>
             </AlertDialogTrigger>
 
-            <AlertDialogContent className="px-2 fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-              <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-                <AlertDialogTitle className="text-lg font-semibold">
-                  Sign Out
-                </AlertDialogTitle>
-                <AlertDialogDescription className="mt-2 text-sm">
-                  Tem certeza que deseja sair do sistema?
-                </AlertDialogDescription>
+            <AlertDialogContent>
+              <AlertDialogTitle className="text-lg font-semibold">
+                Sign Out
+              </AlertDialogTitle>
+              <AlertDialogDescription className="mt-2 text-sm">
+                Tem certeza que deseja sair do sistema?
+              </AlertDialogDescription>
 
-                <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
-                  <AlertDialogCancel className="text-gray-500 hover:text-gray-700">
-                    Cancelar
-                  </AlertDialogCancel>
-                  <AlertDialogAction
-                    onClick={() => logout()}
-                    className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
-                  >
-                    Sair
-                  </AlertDialogAction>
-                </AlertDialogFooter>
-              </div>
+              <AlertDialogFooter className="flex flex-row justify-end mt-4 space-x-2">
+                <AlertDialogCancel className="text-gray-500 hover:text-gray-700">
+                  Cancelar
+                </AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={() => logout()}
+                  className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
+                >
+                  Sair
+                </AlertDialogAction>
+              </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
         </div>

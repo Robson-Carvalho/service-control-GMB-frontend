@@ -20,11 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  CommunityName,
-  ICreateInhabitantDTO,
-  IInhabitant,
-} from "@/interfaces/inhabitantDTOs";
+import { ICreateInhabitantDTO, IInhabitant } from "@/interfaces/inhabitantDTOs";
 import {
   Dialog,
   DialogContent,
@@ -33,18 +29,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { ICommunity } from "@/interfaces/communityDTOs";
+import { communityService } from "@/services/communityService";
 
 interface FormState {
   name: string;
   cpf: string;
   numberPhone: string;
-  community: CommunityName;
+  communityID: string;
   street: string;
   number: string;
 }
 
 export const Inhabitant = () => {
   const [inhabitants, setInhabitants] = useState<IInhabitant[]>([]);
+  const [communities, setCommunities] = useState<ICommunity[]>([]);
 
   useEffect(() => {
     async function getOrdersQuantity() {
@@ -61,6 +60,20 @@ export const Inhabitant = () => {
         }
       }
     }
+    async function getCommunities() {
+      try {
+        const data = await communityService.getAll();
+        setCommunities(data);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          const { message } = error;
+          toast.warning(`${message}`);
+        } else {
+          toast.error("Erro inesperado ao fazer login");
+        }
+      }
+    }
+    getCommunities();
     getOrdersQuantity();
   }, []);
 
@@ -68,7 +81,7 @@ export const Inhabitant = () => {
     name: "",
     cpf: "",
     numberPhone: "",
-    community: CommunityName.DEFAULT,
+    communityID: "",
     street: "",
     number: "",
   });
@@ -83,10 +96,10 @@ export const Inhabitant = () => {
     }));
   };
 
-  const handleSelectChange = (value: CommunityName) => {
+  const handleSelectChange = (value: string) => {
     setFormState((prevState) => ({
       ...prevState,
-      community: value,
+      communityID: value,
     }));
   };
 
@@ -98,11 +111,16 @@ export const Inhabitant = () => {
       cpf: formState.cpf,
       numberPhone: formState.numberPhone,
       address: {
-        community: formState.community,
         street: formState.street,
         number: formState.number,
       },
+      communityID: formState.communityID,
     };
+
+    if (!createData.communityID) {
+      toast.warning("Comunidade não informada!");
+      return;
+    }
 
     try {
       await inhabitantService.create(createData);
@@ -189,19 +207,27 @@ export const Inhabitant = () => {
 
                     <Select
                       required
-                      value={formState.community}
+                      value={formState.communityID}
                       onValueChange={handleSelectChange}
                     >
                       <SelectTrigger id="community" className="w-[180px]">
                         <SelectValue placeholder="Selecione" />
                       </SelectTrigger>
+
                       <SelectContent>
                         <SelectGroup>
                           <SelectLabel>Comunidade</SelectLabel>
-                          <SelectItem value="Jacarezinho">
-                            Jacarezinho
-                          </SelectItem>
-                          <SelectItem value="Quixabeira">Quixabeira</SelectItem>
+                          {communities.length > 0 &&
+                            communities.map((community) => {
+                              return (
+                                <SelectItem
+                                  key={community._id}
+                                  value={community._id}
+                                >
+                                  {community.name}
+                                </SelectItem>
+                              );
+                            })}
                         </SelectGroup>
                       </SelectContent>
                     </Select>

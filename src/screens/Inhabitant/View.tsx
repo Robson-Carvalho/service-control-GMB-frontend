@@ -12,7 +12,7 @@ import { Label } from "@/components/ui/label";
 import { inhabitantService } from "@/services/inhabitantService";
 
 import { Row } from "@tanstack/react-table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { IInhabitant, IUpdateInhabitantDTO } from "@/interfaces/inhabitantDTOs";
@@ -25,6 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { communityService } from "@/services/communityService";
+import { ICommunity } from "@/interfaces/communityDTOs";
 
 export const View = ({ row }: { row: Row<IInhabitant> }) => {
   const [name, setName] = useState<string>(row.original.name);
@@ -32,11 +34,30 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
   const [numberPhone, setNumberPhone] = useState<string | undefined>(
     row.original.numberPhone
   );
-  const [community, setCommunity] = useState<string>(
-    row.original.address.community
+  const [communityID, setCommunityID] = useState<string>(
+    row.original.communityID
   );
   const [street, setStreet] = useState<string>(row.original.address.street);
   const [number, setNumber] = useState<string>(row.original.address.number);
+
+  const [communities, setCommunities] = useState<ICommunity[]>([]);
+
+  useEffect(() => {
+    async function getCommunities() {
+      try {
+        const data = await communityService.getAll();
+        setCommunities(data);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          const { message } = error;
+          toast.warning(`${message}`);
+        } else {
+          toast.error("Erro inesperado ao fazer login");
+        }
+      }
+    }
+    getCommunities();
+  }, []);
 
   const handleSubmit = async (_id: string) => {
     const updatedData = {
@@ -44,10 +65,10 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
       cpf,
       numberPhone,
       address: {
-        community,
         street,
         number,
       },
+      communityID,
     } as IUpdateInhabitantDTO;
 
     try {
@@ -121,7 +142,7 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 Comunidade
               </Label>
 
-              <Select value={community} onValueChange={setCommunity}>
+              <Select value={communityID} onValueChange={setCommunityID}>
                 <SelectTrigger id="community" className="w-[180px]">
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
@@ -129,8 +150,14 @@ export const View = ({ row }: { row: Row<IInhabitant> }) => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Comunidade</SelectLabel>
-                    <SelectItem value="Jacarezinho">Jacarezinho</SelectItem>
-                    <SelectItem value="Quixabeira">Quixabeira</SelectItem>
+                    {communities.length > 0 &&
+                      communities.map((community) => {
+                        return (
+                          <SelectItem key={community._id} value={community._id}>
+                            {community.name}
+                          </SelectItem>
+                        );
+                      })}
                   </SelectGroup>
                 </SelectContent>
               </Select>

@@ -8,6 +8,7 @@ import { PrivateRoute } from "./components/ProtectedRoute";
 import { NotFound } from "./screens/NotFound";
 import { Inhabitant } from "./screens/Inhabitant";
 import { Order } from "./screens/Order";
+import { Community } from "./screens/Community";
 
 export const App = () => {
   return (
@@ -24,6 +25,9 @@ export const App = () => {
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/habitantes" element={<Inhabitant />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/community" element={<Community />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

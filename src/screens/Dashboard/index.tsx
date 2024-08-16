@@ -10,8 +10,6 @@ import {
 import {
   ChartConfig,
   ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
@@ -35,6 +33,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@radix-ui/react-separator";
+import { stringToColor } from "@/utils/stringToColor";
 
 export const Dashboard = () => {
   const [ordersQuantity, setOrdersQuantity] = useState<IOrderWithCommunity[]>(
@@ -77,7 +76,7 @@ export const Dashboard = () => {
   const chartConfig = {
     visitors: {
       label: "Visitantes",
-      color: "hsl(var(--bg-primary))",
+      color: "hsl(var(--primary))",
     },
     label: {
       color: "hsl(var(--background))",
@@ -93,30 +92,22 @@ export const Dashboard = () => {
     return acc;
   }, {} as Record<string, number>);
 
-  const PieChartData = [
-    {
-      community: "jacarezinho",
-      visitors: communityCount["Jacarezinho"] || 0,
-      fill: "#b91c1c",
-    },
-    {
-      community: "quixabeira",
-      visitors: communityCount["Quixabeira"] || 0,
-      fill: "#15803d",
-    },
-  ];
+  const PieChartData = Object.entries(communityCount).map(
+    ([community, count]) => ({
+      community,
+      visitors: count,
+      fill: stringToColor(community),
+    })
+  );
 
-  const PieChartConfig = {
-    visitors: {
-      label: "Visitors",
-    },
-    jacarezinho: {
-      label: "Jacarezinho",
-    },
-    quixabeira: {
-      label: "Quixabeira",
-    },
-  } as ChartConfig;
+  const PieChartConfig = Object.fromEntries(
+    Object.keys(communityCount).map((community) => [
+      community,
+      {
+        label: community,
+      },
+    ])
+  ) as ChartConfig;
 
   const generatePDF = async () => {
     const input = document.querySelector(".download") as HTMLElement;
@@ -279,11 +270,6 @@ export const Dashboard = () => {
                           }}
                         />
                       </Pie>
-
-                      <ChartLegend
-                        content={<ChartLegendContent nameKey="community" />}
-                        className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
-                      />
                     </PieChart>
                   </ChartContainer>
                 </CardContent>

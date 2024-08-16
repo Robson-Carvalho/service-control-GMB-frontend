@@ -1,14 +1,6 @@
-export enum CommunityName {
-  DEFAULT = "",
-  JACAREZEINHO = "Jacarezinho",
-  QUEIMADAS = "Queimadas",
-  QUIXABEIRA = "Quixabeira",
-}
-
 export interface IAddress {
   street: string;
   number: string;
-  community: CommunityName;
 }
 
 export interface ICreateInhabitantDTO {
@@ -16,6 +8,7 @@ export interface ICreateInhabitantDTO {
   cpf: string;
   address: IAddress;
   numberPhone?: string;
+  communityID: string;
 }
 
 export interface IUpdateInhabitantDTO {
@@ -23,6 +16,7 @@ export interface IUpdateInhabitantDTO {
   cpf?: string;
   address?: Partial<IAddress>;
   numberPhone?: string;
+  communityID: string;
 }
 
 export interface IInhabitant {
@@ -31,4 +25,5 @@ export interface IInhabitant {
   cpf: string;
   numberPhone?: string;
   address: IAddress;
+  communityID: string;
 }
