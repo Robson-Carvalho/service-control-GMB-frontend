@@ -29,11 +29,9 @@ import {
   YAxis,
   Label,
 } from "recharts";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@radix-ui/react-separator";
+
 import { stringToColor } from "@/utils/stringToColor";
+import { Separator } from "@/components/ui/separator";
 
 export const Dashboard = () => {
   const [ordersQuantity, setOrdersQuantity] = useState<IOrderWithCommunity[]>(
@@ -109,42 +107,6 @@ export const Dashboard = () => {
     ])
   ) as ChartConfig;
 
-  const generatePDF = async () => {
-    const input = document.querySelector(".download") as HTMLElement;
-    if (input) {
-      setTimeout(async () => {
-        const canvas = await html2canvas(input, {
-          scale: 2,
-          useCORS: true,
-          scrollX: 0,
-          scrollY: 0,
-        });
-        const imgData = canvas.toDataURL("image/png");
-        const pdf = new jsPDF("p", "mm", "a4");
-        const imgWidth = 210;
-        const pageHeight = 295;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
-
-        let position = 0;
-
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        while (heightLeft >= 0) {
-          position -= pageHeight;
-          pdf.addPage();
-          pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-        }
-
-        pdf.save("dashboard.pdf");
-      }, 500);
-    } else {
-      toast.error("Erro ao baixar relatório.");
-    }
-  };
-
   return (
     <div className="page flex flex-col min-h-screen bg-primary-foreground">
       <Header />
@@ -152,15 +114,13 @@ export const Dashboard = () => {
         <section className="max-w-[1440px] mx-auto">
           <div className="flex flex-row items-center justify-between">
             <h2 className="font-bold text-3xl">Dashboard</h2>
-
-            <Button onClick={generatePDF}>Baixar</Button>
           </div>
         </section>
 
         <Separator className="my-4 mx-auto max-w-[1440px]" />
 
         <section className="max-w-[1440px] mx-auto">
-          <div className="my-8 download">
+          <div className="download">
             <div className="charts flex flex-col gap-4">
               <Card>
                 <CardHeader>

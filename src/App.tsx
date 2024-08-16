@@ -9,6 +9,7 @@ import { NotFound } from "./screens/NotFound";
 import { Inhabitant } from "./screens/Inhabitant";
 import { Order } from "./screens/Order";
 import { Community } from "./screens/Community";
+import { Reports } from "./screens/Reports";
 
 export const App = () => {
   return (
@@ -28,6 +29,9 @@ export const App = () => {
           </Route>
           <Route element={<PrivateRoute />}>
             <Route path="/community" element={<Community />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route path="/reports" element={<Reports />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

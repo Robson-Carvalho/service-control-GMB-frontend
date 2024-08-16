@@ -66,7 +66,7 @@ export const Community = () => {
   return (
     <div className="page flex flex-col min-h-screen bg-primary-foreground">
       <Header />
-      <main className="px-2  mt-12 flex-grow w-full">
+      <main className="px-2 mt-12 flex-grow w-full">
         <section className="max-w-[1440px] mx-auto">
           <div className="flex flex-row items-center justify-between">
             <h2 className="font-bold text-3xl">Comunidades</h2>

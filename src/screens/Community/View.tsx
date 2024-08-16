@@ -48,7 +48,7 @@ export const View = ({ row }: { row: Row<ICommunity> }) => {
 
       <DialogContent className="sm:max-w-[425px] rounded-sm ">
         <DialogHeader>
-          <DialogTitle>Visualização e Edição de dados</DialogTitle>
+          <DialogTitle>Edição de dados</DialogTitle>
           <DialogDescription>
             Faça mudanças no nome da comunidade aqui. Clique em salvar para
             finalizar.

@@ -100,6 +100,10 @@ export const Header = () => {
                   <p>Comunidades</p>
                 </Link>
                 <Separator className="my-1" />
+                <Link to="/reports">
+                  <p>Relatórios</p>
+                </Link>
+                <Separator className="my-1" />
 
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
