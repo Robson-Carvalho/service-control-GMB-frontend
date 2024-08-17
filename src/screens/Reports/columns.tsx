@@ -1,58 +1,26 @@
-import { Button } from "@/components/ui/button";
-
-import { IOrderDataTable } from "@/interfaces/orderDTOs";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
-import { View } from "./View";
+import { Download } from "./Download";
+import { IDataTable } from ".";
 
-export const columns: ColumnDef<IOrderDataTable>[] = [
+export const columns: ColumnDef<IDataTable>[] = [
   {
-    accessorKey: "inhabitantName",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Nome
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => <div>{row.getValue("inhabitantName")}</div>,
+    accessorKey: "year",
+    header: "Ano",
   },
   {
-    accessorKey: "inhabitantCPF",
-    header: "CPF",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("inhabitantCPF")}</div>
-    ),
-  },
-  {
-    accessorKey: "content",
-    header: "Pedido",
+    accessorKey: "communities",
+    header: "Número de pedidos",
     cell: ({ row }) => {
-      const content = row.getValue("content") as string;
-      const truncatedContent =
-        content.length > 10 ? `${content.substring(0, 10)}...` : content;
-      return <div>{truncatedContent}</div>;
+      const reduceNumber = row.original.months.reduce((acc, curr) => {
+        return acc + curr.visitors;
+      }, 0);
+
+      return <div>{reduceNumber}</div>;
     },
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
-    ),
-  },
-  {
-    accessorKey: "userType",
-    header: "Setor",
-    cell: ({ row }) => <div className="">{row.getValue("userType")}</div>,
   },
   {
     accessorKey: "action",
-    header: "Ações",
-    cell: ({ row }) => <View row={row} />,
+    header: "Ação",
+    cell: ({ row }) => <Download row={row} />,
   },
 ];

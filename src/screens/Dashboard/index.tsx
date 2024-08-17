@@ -38,12 +38,21 @@ export const Dashboard = () => {
     []
   );
 
+  const year = new Date().getFullYear();
+
   useEffect(() => {
     async function getOrdersQuantity() {
       try {
         const orders = await orderService.getOrdersQuantity();
 
-        setOrdersQuantity(orders);
+        const filteredOrders = orders.filter((order) => {
+          const [, , yearOrder] = order.date.split("/");
+          if (yearOrder == year.toString()) {
+            return order;
+          }
+        });
+
+        setOrdersQuantity(filteredOrders);
       } catch (error: unknown) {
         if (error instanceof Error) {
           const { message } = error;
@@ -54,9 +63,7 @@ export const Dashboard = () => {
       }
     }
     getOrdersQuantity();
-  }, []);
-
-  const year = new Date().getFullYear();
+  }, [year]);
 
   const chartData = Array.from({ length: 12 }, (_, index) => {
     const month = new Date(year, index).toLocaleString("default", {
