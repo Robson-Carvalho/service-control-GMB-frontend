@@ -16,20 +16,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import {
-  BarChart,
-  CartesianGrid,
-  YAxis,
-  XAxis,
-  Bar,
-  LabelList,
-} from "recharts";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+import { BarChart, CartesianGrid, YAxis, Bar, LabelList } from "recharts";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import { Separator } from "@/components/ui/separator";
@@ -135,11 +123,6 @@ export const Download = ({ row }: { row: Row<IDataTable> }) => {
                         tickFormatter={(value) => value.slice(0, 3)}
                       />
 
-                      <XAxis dataKey="visitors" type="number" />
-                      <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent indicator="line" />}
-                      />
                       <Bar
                         dataKey="visitors"
                         layout="vertical"
@@ -190,11 +173,6 @@ export const Download = ({ row }: { row: Row<IDataTable> }) => {
                         tickFormatter={(value) => value.slice(0, 3)}
                       />
 
-                      <XAxis dataKey="visitors" type="number" />
-                      <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent indicator="line" />}
-                      />
                       <Bar
                         dataKey="visitors"
                         layout="vertical"
